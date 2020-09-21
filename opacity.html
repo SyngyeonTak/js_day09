@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 240px;
+            height: 240px;
+            background: pink;
+
+        }
+
+        #pic{
+            width: 100%;
+            height: 100%;
+            background: url(../img/9.png);
+        }
+
+    </style>
+    <script>
+        var mask;
+        var pic;
+        var op;
+        var a = 0.1;
+
+        function init(){
+            pic = document.getElementById("pic");
+            mask = document.createElement("div");
+            mask.style.width = 240 + "px";
+            mask.style.height = 240 + "px";
+            mask.style.background = "black";
+            mask.style.opacity = 0.9;
+            
+            pic.appendChild(mask);
+
+            mask.addEventListener("mouseover", function(){
+                op = 0.2;
+            });
+       
+            mask.addEventListener("mouseout", function(){
+                op = 0.9;
+            });
+        }
+        function move(){
+            mask.style.opacity = parseFloat(mask.style.opacity)+a*(op-parseFloat(mask.style.opacity));
+        }
+
+    </script>
+</head>
+<body onload = "init(); setInterval('move()', 10)">
+    <div id = "wrapper">
+        <div id = "pic">
+            
+        </div>
+
+    </div>
+</body>
+</html>

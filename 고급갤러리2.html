@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #wrapper{
+        width: 600px;
+        height: 600px;
+        border: 1px solid black;
+        position: relative;
+        background: gray;
+        margin: auto;
+    }
+
+    #mask{
+        width: 200px;
+        height: 200px;
+        background: yellow;
+        position: relative;
+        left: 200px;
+        top: 200px;
+        overflow: hidden;
+    }
+
+    #box{
+        width: 600px;
+        height: 600px;
+
+    }
+
+    #box img{
+        margin: 0px;
+    }
+
+</style>
+<script src = "../js/lib.js"></script>
+<script>
+    var wrapper;
+    var mask;
+    var box;
+    var targetX;
+    var targetY;
+    var a = 0.1;
+    var randomX;
+    var randomY;
+
+    window.addEventListener("load", function(){
+        init();
+        setInterval("move()", 10);
+    });
+
+
+    function init(){
+        wrapper = document.getElementById("wrapper");
+        mask = document.getElementById("mask");
+        box = document.getElementById("box");
+        box.style.position = "absolute";
+        box.style.left = 0+"px";
+        box.style.top = 0+"px";
+
+        var n = 0;
+        for(var a = 1; a<=3; a++){//층을 결정, top을 결정
+            for(var i=1;i<=3;i++){//호를 결정, left 값을 결정
+                n++;
+                var img = document.createElement("img"); //<img/>
+                img.src="../img/travel/"+n+".jpg";
+                img.style.width=200+"px";
+                img.style.height=200+"px";
+                img.style.position="absolute";
+                img.style.left=(i-1)*200+"px"; //0, 200,400
+                img.style.top = (a-1)*200+"px";
+                box.appendChild(img);
+            }
+        }
+
+
+        targetX = 0;
+        targetY = 0;
+
+        //문서 전체를 대상으로 키보드 이벤트 구현;
+        document.body.addEventListener("keydown", function(){
+            setTarget();
+        });
+
+
+    }
+
+    function move(){
+        box.style.left = parseFloat(box.style.left)+a*(targetX-parseFloat(box.style.left))+"px";
+        box.style.top = parseFloat(box.style.top)+a*(targetY-parseFloat(box.style.top))+"px";
+    }
+
+    //디버깅을 위한, 좌표 출력(필수는 아님..공부목적)
+    function printPos(){
+        box.style.color = "while";
+        box.innerText = "x좌표 "+box.style.left+"\n";
+        box.innerText += "y좌표 "+box.style.top;
+    }
+
+    function setTarget(){
+        switch(event.keyCode){
+                case 37:
+                    moveLeft();
+                    break;
+                case 38:
+                    moveUp();
+                    break;
+                case 39:
+                    moveRight();
+                    break;
+                case 40:
+                    moveDown();
+                    break;
+                
+            }
+
+       
+
+    }
+
+    function moveRight(){
+        
+        if(targetX <=-400){
+            alert("더이상 사진이 없습니다.");
+        }else{
+            targetX -= 200;
+
+        }
+        console.log(targetX, targetY);
+
+    }
+
+    function moveLeft(){
+        if(targetX >=0){
+            alert("더이상 사진이 없습니다.");
+        }else{
+            targetX += 200;
+        }
+        console.log(targetX, targetY);
+    }
+
+    function moveUp(){
+        if(targetY >= 0){
+            alert("더이상 사진이 없습니다.")
+        }else{
+            targetY += 200;
+
+        }
+        console.log(targetX, targetY);
+    }
+
+    function moveDown(){
+        if(targetY <=-400){
+            alert("더이상 사진이 없습니다.")
+        }else{
+            targetY -= 200;
+
+        }
+        console.log(targetX, targetY);
+    }
+
+    
+
+</script>
+<body>
+    <div id = "wrapper">
+        <div id ="mask">
+            <div id = "box">
+                <!-- <img> -->
+
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

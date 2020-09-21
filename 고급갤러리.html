@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 500px;
+            height: 450px;
+            background: yellow;
+            margin:auto;
+        }
+
+        #mask{
+            width: 500px;
+            height: 400px;
+            background: blue;
+            overflow: hidden;
+        }
+
+        #box{
+            width: 3500px;
+            height: 400px;
+            background: burlywood;
+        }
+
+        #navi{
+            text-align: center; /*div의 컨텐츠를 가운데 정렬*/
+            font-size: 30px;
+            
+        }
+
+        a{
+            text-decoration: none;/*link 밑줄 없애기*/
+        }
+
+        
+    </style>
+    <script>
+
+        var box;
+        var targetX;
+        var a = 0.1;
+
+        window.addEventListener("load", function(){
+            init();
+            setInterval("move()", 10);
+        });
+
+        function init(){
+            box = document.getElementById("box");
+            box.style.position = "relative";
+            box.style.left=0+"px";
+
+
+            for(var i = 1; i<=7; i++){
+                var img = document.createElement("img");
+                img.src =  "../img/travel/"+i+".jpg";
+                img.style.width = 500+"px";
+                img.style.height = 400+"px";
+                box.appendChild(img);
+            }
+            
+        }
+
+        function move(){
+            box.style.left=parseFloat(box.style.left)+a*(targetX-parseFloat(box.style.left))+"px"; //화면의 좌측은 음수방향이니깐...
+            
+        }
+
+        /*box div를 지정하자*/ 
+        function setTarget(n){
+            targetX = n;
+        }
+        
+    </script>
+</head>
+<body>
+    <div id = "wrapper">
+        <div id = "mask">
+            <!-- 사진을 품고 있음 div, 단 넘치는 컨텐츠는 mask에 의해 가려짐 -->
+            <div id = "box">
+                <!-- <img src = "../img/travel/1.jpg"/> -->
+            </div>
+        </div>
+        <div id = "navi">
+            <!-- 자바스크립트를 작서할 수 있는 영역은 총 3가지
+                (1) <script> 태그안에서
+                (2) onClick = "자바스크립트 영역"
+                (3) a href = "javascript:자바스크립트 영역"
+            -->
+            <a href ="javascript:setTarget(0)">●</a>
+            <a href ="javascript:setTarget(-500)">●</a>
+            <a href ="javascript:setTarget(-1000)">●</a>
+            <a href ="javascript:setTarget(-1500)">●</a>
+            <a href ="javascript:setTarget(-2000)">●</a>
+            <a href ="javascript:setTarget(-2500)">●</a>
+            <a href ="javascript:setTarget(-3000)">●</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #wrapper{
+            width: 600px;
+            height: 500px;
+            background: white;
+            
+        }
+
+        #header{
+            width: 100%;
+            height: 50px;
+            background: dodgerblue;
+        }
+
+        #header div{
+            width: 200px;
+            height: 100%;
+            text-align: center;
+            display: inline-block;
+        }
+
+        #content{
+            width: 100%;
+            /* height: 450px; */
+            background: yellow;
+            display: none;
+        }
+
+    </style>
+    <script>
+        var wrapper;
+        var header;
+        var content;
+
+        var n;
+        var q;
+        var b;
+        var targetH;
+
+        var a = 0.1;
+        function init(){
+            header = document.getElementById("header");
+            content = document.getElementById("content");
+
+            n = document.createElement("div");
+            q = document.createElement("div");
+            b = document.createElement("div");
+
+            n.style.background = "red";
+            n.innerText = "공지사항";
+
+            q.style.background = "purple";
+            q.innerText = "Q&A";
+
+            b.style.background = "blue";
+            b.innerText = "자유게시판";
+
+            n.addEventListener("mouseover", function(){
+                content.style.background = "red";
+                content.style.height = 450 + "px";
+                content.style.display = "block";
+            });
+
+            q.addEventListener("mouseover", function(){
+                content.style.background = "purple";
+                content.style.height = 450 + "px";
+                content.style.display = "block";
+
+            });
+
+            b.addEventListener("mouseover", function(){
+                content.style.background = "blue";
+                content.style.height = 450 + "px";
+                content.style.display = "block";
+
+            });
+
+            n.addEventListener("mouseout", function(){
+                content.style.display = "none";
+            });
+            q.addEventListener("mouseout", function(){
+                content.style.display = "none";
+            });
+            b.addEventListener("mouseout", function(){
+                content.style.display = "none";
+            });
+
+            header.appendChild(n);
+            header.appendChild(q);
+            header.appendChild(b);
+        }
+
+        // function move(){
+        //     content.style.height = parseFloat(content.style.height)+a*(targetH-parseFloat(content.style.height))+"px";
+        // }
+    </script>
+</head>
+<body onload = "init()">
+    <div id = "wrapper">
+        <div id ="header"></div>
+        <div id = "content"></div>
+    </div>
+</body>
+</html>
